@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harapan untuk Husna</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&family=Marcellus&display=swap" rel="stylesheet">
+
+<style>
+/* ===================== GLOBAL ===================== */
+body {
+    margin:0;
+    font-family:'Quicksand';
+    background: linear-gradient(180deg, #fff3f7, #ffe5ef, #fff8fb);
+    overflow-x:hidden;
+}
+
+/* HEADER */
+header {
+    background:#f7d1e1;
+    padding:18px;
+    text-align:center;
+    border-bottom:3px dashed #f4b8ce;
+    position:relative;
+}
+
+nav a {
+    margin:0 18px;
+    text-decoration:none;
+    color:#a84e6c;
+    font-weight:600;
+    font-size:1.05rem;
+}
+nav a:hover { color:#c16082; }
+
+/* ===================== CARDS ===================== */
+.cards {
+    max-width:1000px;
+    margin:60px auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:30px;
+}
+
+.card {
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 6px 16px rgba(255,120,160,0.18);
+    border:2px solid #f7d1e1;
+    font-size:1.1rem;
+    color:#6b4b55;
+    line-height:1.55;
+    position:relative;
+    animation:fadeIn .6s ease;
+    transition:0.3s;
+}
+
+.card:hover {
+    transform:translateY(-6px) scale(1.02);
+    box-shadow:0 10px 22px rgba(255,120,160,0.28);
+}
+
+/* small hearts on cards */
+.card::after {
+    content:"💖";
+    position:absolute;
+    bottom:12px;
+    right:18px;
+    opacity:0.5;
+    font-size:1.4rem;
+}
+
+/* Animasi fade */
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(20px);}
+    to   {opacity:1; transform:translateY(0);}
+}
+
+/* Floating hearts animasi */
+.floating {
+    position:absolute;
+    width:42px;
+    opacity:0.75;
+    animation:floating 6s ease-in-out infinite;
+}
+.f1 { top:18%; left:10%; animation-delay:0s; }
+.f2 { top:75%; left:6%; animation-delay:1s; }
+.f3 { top:30%; right:10%; animation-delay:0.8s; }
+.f4 { top:80%; right:20%; animation-delay:2s; }
+
+@keyframes floating {
+    0% { transform:translateY(0); opacity:.6 }
+    50% { transform:translateY(-22px); opacity:1 }
+    100% { transform:translateY(0); opacity:.6 }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px; height: 10px;
+    opacity: 0.8;
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+@keyframes fall {
+    0% { transform: translateY(-100vh) rotate(0deg);}
+    100% { transform: translateY(100vh) rotate(360deg);}
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a href="index.html">Beranda</a>
+        <a href="ucapan.html">Ucapan</a>
+        <a href="galeri.html">Galeri</a>
+        <a href="harapan.html">Harapan</a>
+    </nav>
+</header>
+
+<!-- CARDS HARAPAN -->
+<div class="cards">
+
+    <div class="card">🌸 Semoga selalu diberi kemudahan oleh Allah, selalu menjadi anak yang sholehah berbakti kepada kedua orang tua.  
+        Semoga kamu bisa mengangkat derajat keluarga kamu di dunia dan akhirat.  
+        Tetap jadi una yang aku kenal: cantik, lucu, imutt, ceria, penyayang — pokoknya versi terbaik dari dirimu. 💗</div>
+
+    <div class="card">🎀 Semoga mimpi-mimpimu tercapai. Kalau jatuh, bangun lagi yaaa.  
+        Jangan pernah ngerasa sendiri, banyak banget yang sayang sama kamu dan selalu dukung kamu — termasuk aku hehe 😅.  
+        Aku bakal selalu ada buat kamu apa pun keadaannya. Semoga hubungan kita selalu baik ke depannya. ✨</div>
+
+    <div class="card">✨ Semoga selalu dikelilingi orang-orang baik di mana pun dan kapan pun.  
+        Walaupun pasti ada aja orang yang jahat sama kamu, ingat ya kamu gak sendirian—keluarga dan temen-temen yang sayang kamu pasti selalu di depan buat belain kamu.  
+        Cukup sekian kultum pada kesempatan kali ini wkwkw 😆  
+        Selamat ulang tahun ke-20 yaa unaa! 🥳💖</div>
+
+</div>
+
+
+<!-- AUDIO -->
+<audio id="bg-audio" loop>
+    <source src="assets/audio.mp3" type="audio/mp3">
+</audio>
+
+<script>
+/* ====== AUDIO PERSIST ====== */
+let audio = document.getElementById("bg-audio");
+let lastTime = localStorage.getItem("audioTime");
+
+if (lastTime) audio.currentTime = parseFloat(lastTime);
+audio.play().catch(()=>{});
+
+setInterval(()=> localStorage.setItem("audioTime", audio.currentTime), 500);
+
+/* ====== CONFETTI ====== */
+function confettiShow(){
+    for(let i=0;i<25;i++){
+        let c = document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=["#ffd1e8","#ffc7ef","#ffe6f3","#ffb3d6"][Math.floor(Math.random()*4)];
+        c.style.animationDuration=(2+Math.random()*3)+"s";
+        c.style.width=c.style.height=(6+Math.random()*8)+"px";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4000);
+    }
+}
+setTimeout(confettiShow, 400);
+</script>
+
+</body>
+</html>

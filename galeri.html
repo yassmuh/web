@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeri Kenangan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&family=Marcellus&display=swap" rel="stylesheet">
+
+<style>
+/* ===================== GLOBAL ===================== */
+body {
+    background: linear-gradient(180deg, #fff3f7, #ffe6ef, #fff8fb);
+    margin: 0;
+    font-family: 'Quicksand';
+    overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+    background:#f7d1e1;
+    padding:18px;
+    text-align:center;
+    border-bottom:3px dashed #f4b8ce;
+    position: relative;
+}
+
+nav a {
+    margin:0 18px;
+    text-decoration:none;
+    color:#a84e6c;
+    font-weight:600;
+    font-size:1.05rem;
+}
+nav a:hover { color:#c86f8e; }
+
+/* ===================== GALERI ===================== */
+.gallery {
+    max-width:1150px;
+    margin:60px auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:30px;
+}
+
+.card {
+    background:white;
+    border-radius:18px;
+    box-shadow:0 4px 12px rgba(255,120,160,0.18);
+    overflow:hidden;
+    transition:0.35s;
+    cursor:pointer;
+    position:relative;
+}
+.card:hover {
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:0 10px 22px rgba(255,120,160,0.28);
+}
+
+.card img {
+    width:100%;
+    height:270px;
+    object-fit:cover;
+    transition:.3s;
+}
+.card:hover img {
+    filter:brightness(1.08);
+}
+
+.caption {
+    padding:15px;
+    text-align:center;
+    font-size:1rem;
+    color:#6b4b55;
+}
+
+/* Floating Hearts */
+.floating {
+    position:absolute;
+    width:42px;
+    opacity:0.7;
+    animation:floating 6s ease-in-out infinite;
+}
+.f1 { top:15%; left:10%; animation-delay:0s; }
+.f2 { top:65%; left:5%; animation-delay:1.3s;}
+.f3 { top:30%; right:10%; animation-delay:0.8s;}
+.f4 { top:75%; right:18%; animation-delay:2s;}
+
+@keyframes floating {
+    0% { transform:translateY(0); opacity:.5 }
+    50% { transform:translateY(-20px); opacity:1 }
+    100% { transform:translateY(0); opacity:.5 }
+}
+
+/* ===================== MODAL ===================== */
+.modal {
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(4px);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+    animation:fadeIn .4s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+.modal-img {
+    max-width:80%;
+    max-height:80%;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(255,130,160,0.4);
+    animation:pop .35s ease;
+}
+
+@keyframes pop {
+    from {transform:scale(.85); opacity:0;}
+    to {transform:scale(1); opacity:1;}
+}
+
+.close {
+    position:absolute;
+    top:25px;
+    right:40px;
+    color:white;
+    font-size:40px;
+    cursor:pointer;
+}
+
+.nav-btn {
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:45px;
+    color:white;
+    cursor:pointer;
+    padding:10px 15px;
+    user-select:none;
+}
+.prev { left:30px; }
+.next { right:30px; }
+
+/* CONFETTI */
+.confetti {
+    position: fixed;
+    width: 10px; height: 10px;
+    opacity: 0.8;
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+@keyframes fall {
+    0% { transform: translateY(-100vh) rotate(0deg);}
+    100% { transform: translateY(100vh) rotate(360deg);}
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a href="index.html">Beranda</a>
+        <a href="ucapan.html">Ucapan</a>
+        <a href="galeri.html">Galeri</a>
+        <a href="harapan.html">Harapan</a>
+    </nav>
+</header>
+
+
+<!-- ===================== GALERI ===================== -->
+<section class="gallery">
+
+    <!-- Album 0 -->
+    <div class="card" data-album="foto0" >
+        <img src="assets/foto/foto0.jpg">
+        <div class="caption">Awal banget kita foto bareng hehe 😊</div>
+    </div>
+
+    <!-- Album 1 -->
+    <div class="card" data-album="foto1,foto1_2" >
+        <img src="assets/foto/foto1.jpg">
+        <div class="caption">Inget ga pas aku awal-awal foto kamu hehe 😅</div>
+    </div>
+
+    <!-- Album 2 -->
+    <div class="card" data-album="foto2,foto2_2,foto2_3,foto2_4,foto2_5,foto2_6,foto2_7,foto2_8" >
+        <img src="assets/foto/foto2.jpg">
+        <div class="caption">niii pas awal awal jadian kita ke kuningan naaa wkwk😄</div>
+    </div>
+
+    <!-- Album 3 -->
+    <div class="card" data-album="foto3,foto3_2,foto3_3,foto3_4,foto3_5,foto3_6,foto3_7">
+        <img src="assets/foto/foto3.jpg">
+        <div class="caption">maap aku suka ss kmu soalnya lucuuu😊 ✨</div>
+    </div>
+
+    <!-- Album 4 -->
+    <div class="card" data-album="foto4,foto4_2,foto4_3,foto4_4,foto4_5,foto4_6,foto4_7,foto4_8,foto4_9,foto4_10,foto4_11,foto4_12">
+        <img src="assets/foto/foto4.jpg">
+        <div class="caption">i love the smiths 🩷</div>
+    </div>
+
+    <!-- Album 5 -->
+    <div class="card" data-album="foto5,foto5_2,foto5_3">
+        <img src="assets/foto/foto5.jpg">
+        <div class="caption">Bunga 🌼</div>
+    </div>
+
+    <!-- Album 6 -->
+    <div class="card" data-album="foto6,foto6_2,foto6_3,foto6_4">
+        <img src="assets/foto/foto6.jpg">
+        <div class="caption">Bentoo</div>
+    </div>
+
+    <!-- Album 7 -->
+    <div class="card" data-album="foto7,foto7_2,foto7_3,foto7_4">
+        <img src="assets/foto/foto7.jpg">
+        <div class="caption">Blomaaa</div>
+    </div>
+
+    <!-- Album 8 -->
+    <div class="card" data-album="foto8,foto8_2,foto8_3,foto8_4,foto8_5">
+        <img src="assets/foto/foto8.jpg">
+        <div class="caption">jajan dan jalan 👸</div>
+    </div>
+
+    <!-- Album 9 -->
+    <div class="card" data-album="foto9,foto9_2,foto9_3">
+        <img src="assets/foto/foto9.jpg">
+        <div class="caption">fotonya dikit bngtt huhu😭, pdhal itu banyak bangt kenangannya, ke kuningan sambil hujan-hujanan, ujung ujungnya nyeblak wkwk</div>
+    </div>
+
+    <!-- Album 10 -->
+    <div class="card" data-album="foto10,foto10_2,foto10_3,foto10_4,foto10_5,foto10_6,foto10_7,foto10_8,foto10_9,foto10_10,foto10_11,foto10_12">
+        <img src="assets/foto/foto10.jpg">
+        <div class="caption">Malem olimpik , nyebelin ga bisa pulang kudu debat dlu wkwkwk</div>
+    </div>
+
+    <!-- Album 11 -->
+    <div class="card" data-album="foto11,foto11_2,foto11_3,foto11_4">
+        <img src="assets/foto/foto11.jpg">
+        <div class="caption">Ulang tahun unaaarahun laluuu hehe😊</div>
+    </div>
+
+
+</section>
+
+<!-- ===================== MODAL ===================== -->
+<div id="imgModal" class="modal">
+    <span class="close">&times;</span>
+    <span class="nav-btn prev">&#10094;</span>
+    <img id="popupImg" class="modal-img">
+    <span class="nav-btn next">&#10095;</span>
+</div>
+
+<!-- ===================== AUDIO ===================== -->
+<audio id="bg-audio" loop>
+    <source src="assets/audio.mp3" type="audio/mp3">
+</audio>
+
+<script>
+/* ========== AUDIO SYSTEM (persist di semua halaman) ========== */
+let audio = document.getElementById("bg-audio");
+
+let lastTime = localStorage.getItem("audioTime");
+if (lastTime) audio.currentTime = parseFloat(lastTime);
+audio.play().catch(()=>{});
+
+setInterval(()=> localStorage.setItem("audioTime", audio.currentTime), 500);
+
+/* ========== GALERI ALBUM SYSTEM ========== */
+let modal = document.getElementById("imgModal");
+let modalImg = document.getElementById("popupImg");
+let closeBtn = document.querySelector(".close");
+let nextBtn = document.querySelector(".next");
+let prevBtn = document.querySelector(".prev");
+
+let currentAlbum = [];
+let currentIndex = 0;
+
+function openConfetti(){
+    for(let i=0;i<25;i++){
+        let c = document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=["#ffd1e8","#ffc7ef","#ffe6f3","#ffb3d6"][Math.floor(Math.random()*4)];
+        c.style.animationDuration=(2+Math.random()*3)+"s";
+        c.style.width=c.style.height=(6+Math.random()*8)+"px";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4000);
+    }
+}
+
+document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => {
+        currentAlbum = card.dataset.album.split(",")
+            .map(name => `assets/foto/${name}.jpg`);
+
+        currentIndex = 0;
+        modal.style.display = "flex";
+        modalImg.src = currentAlbum[currentIndex];
+
+        openConfetti();
+    });
+});
+
+nextBtn.onclick = () => {
+    currentIndex = (currentIndex + 1) % currentAlbum.length;
+    modalImg.src = currentAlbum[currentIndex];
+};
+prevBtn.onclick = () => {
+    currentIndex = (currentIndex - 1 + currentAlbum.length) % currentAlbum.length;
+    modalImg.src = currentAlbum[currentIndex];
+};
+
+closeBtn.onclick = () => modal.style.display = "none";
+modal.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+
+</script>
+
+</body>
+</html>

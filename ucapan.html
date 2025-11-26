@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ucapan Spesial</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&family=Marcellus&display=swap" rel="stylesheet">
+
+<style>
+/* ========= GLOBAL ========= */
+body {
+    background: linear-gradient(180deg, #fff3f7, #ffe5ef, #fff8fb);
+    margin:0;
+    font-family:'Quicksand';
+    overflow-x:hidden;
+}
+
+/* ========= HEADER ========= */
+header {
+    background:#f7d1e1;
+    padding:18px;
+    text-align:center;
+    border-bottom:3px dashed #f4b8ce;
+    position:relative;
+}
+
+nav a {
+    margin:0 18px;
+    text-decoration:none;
+    color:#a84e6c;
+    font-weight:600;
+    font-size:1.05rem;
+}
+nav a:hover { color:#c16082; }
+
+
+/* ========= CONTAINER (UCAPAN) ========= */
+.container {
+    max-width:800px;
+    margin:60px auto;
+    background:white;
+    padding:40px 32px;
+    border-radius:22px;
+    border:2px dashed #ffc0d8;
+    box-shadow:0 8px 20px rgba(255,140,170,0.15);
+    position:relative;
+    animation:fadeIn .7s ease;
+}
+
+.container::before {
+    content:"";
+    position:absolute;
+    top:-18px; left:30px;
+    width:85px;
+    height:35px;
+    background:url('https://i.imgur.com/H0r8aIV.png') no-repeat center/contain;
+}
+
+.container::after {
+    content:"✨";
+    position:absolute;
+    bottom:-10px;
+    right:20px;
+    font-size:1.6rem;
+    opacity:0.7;
+}
+
+/* Judul */
+h2 {
+    font-family:'Marcellus';
+    color:#cc5f82;
+    text-align:center;
+    margin-bottom:20px;
+    font-size:2rem;
+    text-shadow:1px 1px 0 #ffe7ef;
+}
+
+/* Floating cute hearts */
+.floating {
+    position:absolute;
+    width:40px;
+    opacity:0.75;
+    animation:floating 6s ease-in-out infinite;
+}
+.f1 { top:20%; left:8%; animation-delay:0s; }
+.f2 { top:75%; left:5%; animation-delay:1s; }
+.f3 { top:32%; right:12%; animation-delay:0.8s; }
+.f4 { top:78%; right:20%; animation-delay:2s; }
+
+@keyframes floating {
+    0% { transform:translateY(0); opacity:.6 }
+    50% { transform:translateY(-22px); opacity:1 }
+    100% { transform:translateY(0); opacity:.6 }
+}
+
+/* Sparkles / confetti */
+.confetti {
+    position: fixed;
+    width: 10px; height: 10px;
+    opacity: 0.8;
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+@keyframes fall {
+    0% { transform: translateY(-100vh) rotate(0deg);}
+    100% { transform: translateY(100vh) rotate(360deg);}
+}
+
+
+/* Fade animation */
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(20px);}
+    to   {opacity:1; transform:translateY(0);}
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <nav>
+        <a href="index.html">Beranda</a>
+        <a href="ucapan.html">Ucapan</a>
+        <a href="galeri.html">Galeri</a>
+        <a href="harapan.html">Harapan</a>
+    </nav> 
+</header>
+
+<div class="container">
+    <h2>Ucapan Untuk Husna 🎀</h2>
+
+    <p style="line-height:1.8; font-size:1.17rem; color:#6b4b55;">
+        Selamat ulang tahun yang ke-20, Husna.  
+        udh 20 tahun aja yaaa kmu naaa udh makin gede aja niii wkwk, 
+        semoga kamu suka naaa dengan semua yang aku bikinn di website ini. 
+        maap yaaa unaaa buat ulang tahun kamu yang tahun lalu aku ga bisa ngasih apa apa, 
+        anggep aja ini aku kasi kamu buat ngeganti ultah yang tahun lalu dan merayakan ultah yang sekarangg. 
+        aku seneng bnagt bisa ngerayain ultah kamu sekarang dan semoga kamu sukaa dan senenggg wkwk. makasihh naaa bajunyaaa aku suka bangettt, 
+        di buat sama orang yang istimewa barangnya juga ikut istimewa, selamatt ulang tahun unnaaaa yang ke 20 🥳🥳🥳
+        ✨
+    </p>
+</div>
+
+<!-- AUDIO -->
+<audio id="bg-audio" loop>
+    <source src="assets/audio.mp3" type="audio/mp3">
+</audio>
+
+
+<script>
+/* === AUDIO MEMORIZE === */
+let audio = document.getElementById("bg-audio");
+let lastTime = localStorage.getItem("audioTime");
+
+if (lastTime) audio.currentTime = parseFloat(lastTime);
+audio.play().catch(()=>{});
+
+setInterval(()=> localStorage.setItem("audioTime", audio.currentTime), 500);
+
+/* === CONFETTI === */
+function showConfetti(){
+    for(let i=0;i<25;i++){
+        let c = document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=["#ffd1e8","#ffc7ef","#ffe6f3","#ffb3d6"][Math.floor(Math.random()*4)];
+        c.style.animationDuration=(2+Math.random()*3)+"s";
+        c.style.width=c.style.height=(6+Math.random()*8)+"px";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4000);
+    }
+}
+setTimeout(showConfetti, 400);
+</script>
+
+</body>
+</html>

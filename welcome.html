@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ulang Tahun Husna</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&family=Marcellus&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(180deg, #fff3f7, #ffe6ef, #fff8fb);
+      color: #5a4a4a;
+      overflow-x: hidden;
+    }
+
+    /* HEADER CUTE */
+    header {
+      background: #f7d1e1;
+      padding: 18px;
+      text-align: center;
+      border-bottom: 3px dashed #f4b8ce;
+      position: relative;
+    }
+
+    nav a {
+      margin: 0 18px;
+      text-decoration: none;
+      color: #a84e6c;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    nav a:hover { color: #c86f8e; }
+
+    /* HERO SECTION */
+    .hero {
+      display: flex;
+      height: 88vh;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      background: linear-gradient(to bottom right, #ffe3ed, #fff8fa);
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1.2s ease;
+    }
+
+    /* floating sparkles */
+    .sparkle {
+      position: absolute;
+      width: 40px;
+      opacity: 0.7;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .spark1 { top: 20%; left: 10%; animation-delay: 0s; }
+    .spark2 { top: 70%; left: 18%; animation-delay: 1.3s; }
+    .spark3 { top: 50%; right: 20%; animation-delay: 0.8s; }
+    .spark4 { top: 15%; right: 10%; animation-delay: 2s; }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity:0.6; }
+      50% { transform: translateY(-18px); opacity:1; }
+      100% { transform: translateY(0); opacity:0.6; }
+    }
+
+    /* HERO BOX */
+    .hero-box {
+      text-align: center;
+      max-width: 600px;
+      padding: 35px;
+      background: rgba(255,255,255,0.75);
+      border-radius: 18px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      animation: popin 1s ease;
+    }
+
+    @keyframes popin {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .hero-box h1 {
+      font-family: 'Marcellus', serif;
+      font-size: 3rem;
+      color: #cc5f82;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255,170,190,0.5);
+    }
+
+    .hero-box p {
+      font-size: 1.2rem;
+      color: #6b4b55;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 40px;
+      background: #f8dce8;
+      text-align: center;
+      padding: 30px;
+      font-size: 0.95rem;
+      color: #7a5c5c;
+      border-top: 3px dashed #f4b8ce;
+    }
+   
+    /* confetti */
+    @keyframes fall {
+      0% { transform: translateY(-100vh) rotate(0deg);}
+      100% { transform: translateY(100vh) rotate(360deg);}
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: pink;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fadeIn {
+      from {opacity:0;}
+      to {opacity:1;}
+    }
+  </style>
+
+  <!-- AUDIO BACKGROUND -->
+  <audio id="bg-audio" loop>
+    <source src="/assets/audio.mp3" type="audio/mpeg" />
+  </audio>
+  
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <a href="welcome.html">Beranda</a>
+    <a href="ucapan.html">Ucapan</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="harapan.html">Harapan</a>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <div class="hero-box">
+    <h1>Selamat Ulang Tahun ke-20, Husna Maulidah 🎀✨</h1>
+    <p>Semoga kamu sukaaa aku bikin ini wkwkwk</p>
+  </div>
+</section>
+
+<footer>Dibuat dengan sepenuh hati untuk unaa 💗</footer>
+
+<script>
+/* AUDIO SYSTEM */
+let audio = document.getElementById("bg-audio");
+
+// Ambil waktu musik sebelumnya
+let lastTime = localStorage.getItem("audioTime");
+if (lastTime) audio.currentTime = parseFloat(lastTime);
+
+// Play musik
+audio.play().catch(()=>{});
+
+// simpan progress
+setInterval(()=> {
+  localStorage.setItem("audioTime", audio.currentTime);
+}, 500);
+
+/* CONFETTI */
+function createConfetti(){
+  for(let i=0;i<35;i++){
+    let c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100 + "vw";
+    c.style.background = ["#ffd1e8","#ffc7ef","#ffe6f3","#ffb3d6"][Math.floor(Math.random()*4)];
+    c.style.animationDuration = (2 + Math.random()*3) + "s";
+    c.style.width = c.style.height = (6+Math.random()*8) + "px";
+    document.body.appendChild(c);
+
+    setTimeout(()=>c.remove(), 5000);
+  }
+}
+createConfetti();
+</script>
+
+</body>
+</html>
